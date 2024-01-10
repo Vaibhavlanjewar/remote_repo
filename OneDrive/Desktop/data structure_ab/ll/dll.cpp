@@ -106,7 +106,52 @@ node* deleteHead(node* head){
             return head;
         }
         
-    
+    // void deletenode(node* temp){
+    //     node* prev=temp->back;
+    //     node* front=temp->next;
+
+    //     if(front==NULL){
+    //         prev->next=nullptr;
+    //         temp->back=nullptr;
+    //         free(temp);
+    //         return ;
+    //     }
+
+    //     prev->next=front;
+    //     front->back=prev;
+    //     temp->next=temp->back=nullptr;
+    //     free(temp);
+
+    // }
+
+
+    //-------------Insertion dll---------------
+   
+   node* insertb4Head(node* head,int val){
+    node* newhead=new node(val,head,nullptr);
+    head->back=newhead;
+    return newhead;
+   }
+
+   node* insertb4tail(node* head, int val){
+    if(head->next==NULL){
+        return insertb4Head(head,val);
+
+    }
+    node* tail=head;
+    while(tail->next!=NULL){
+        tail=tail->next;
+    }
+
+    node* prev=tail->back;
+    node* newnode=new node(val,tail,prev);
+    prev->next=newnode;
+    tail->back=newnode;
+    return head;
+   
+
+   }
+
 
 int main(){
     vector<int>arr={1,3,5,7};
@@ -116,7 +161,13 @@ int main(){
 
   //  head= deleteTail(head);
   
-    head=removeKthElment(head,4);
+  // head=removeKthElment(head,4);
+   // deletenode(head);
+
+   // insertion 
+
+  // head=insertb4Head(head,10);
+  head=insertb4tail(head,12);
     print(head);
     return 0;
 }
