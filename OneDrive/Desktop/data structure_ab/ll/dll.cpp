@@ -152,6 +152,46 @@ node* deleteHead(node* head){
 
    }
 
+// ----------- Reverse DLL -----------
+node* reversedll(node* head){
+if(head== NULL || head->next==NULL){
+    return head;
+}
+node* prev=NULL;
+node* curr=head;
+while(curr !=NULL){
+    prev=curr->back;
+    curr->next=prev;
+    prev=curr->back;
+    }
+    return prev->back;
+}
+   node*  insertb4KthEl(node* head,int k, int val){
+    if(k==1){
+        return insertb4Head(head,val);
+    }
+    node* temp=head;
+    int cnt=0;
+    while(temp !=NULL){
+        cnt++;
+        if(cnt==k) break;
+        temp=temp->next;
+    }
+    node* prev=temp->back;
+    node* newnode=new node(val,temp,prev);
+    prev->next=newnode;
+    temp->back=newnode;
+    return head;
+   }
+
+   void inserb4node(node* tempnd,int val){
+    node* prev=tempnd->back;
+    node* newnode=new node(val,tempnd,prev);
+    prev->next=newnode;
+    tempnd->back=newnode;
+
+   }
+
 
 int main(){
     vector<int>arr={1,3,5,7};
@@ -164,10 +204,14 @@ int main(){
   // head=removeKthElment(head,4);
    // deletenode(head);
 
-   // insertion 
+   // ------------ insertion ---------------
 
   // head=insertb4Head(head,10);
-  head=insertb4tail(head,12);
+ 
+  //head=insertb4tail(head,12);
+  // head=insertb4KthEl(head,2,14);
+ // inserb4node(head->next,0);
+ head= reversedll(head);
     print(head);
     return 0;
 }
