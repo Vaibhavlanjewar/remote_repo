@@ -106,7 +106,92 @@ node* deleteHead(node* head){
             return head;
         }
         
-    
+    // void deletenode(node* temp){
+    //     node* prev=temp->back;
+    //     node* front=temp->next;
+
+    //     if(front==NULL){
+    //         prev->next=nullptr;
+    //         temp->back=nullptr;
+    //         free(temp);
+    //         return ;
+    //     }
+
+    //     prev->next=front;
+    //     front->back=prev;
+    //     temp->next=temp->back=nullptr;
+    //     free(temp);
+
+    // }
+
+
+    //-------------Insertion dll---------------
+   
+   node* insertb4Head(node* head,int val){
+    node* newhead=new node(val,head,nullptr);
+    head->back=newhead;
+    return newhead;
+   }
+
+   node* insertb4tail(node* head, int val){
+    if(head->next==NULL){
+        return insertb4Head(head,val);
+
+    }
+    node* tail=head;
+    while(tail->next!=NULL){
+        tail=tail->next;
+    }
+
+    node* prev=tail->back;
+    node* newnode=new node(val,tail,prev);
+    prev->next=newnode;
+    tail->back=newnode;
+    return head;
+   
+
+   }
+
+// ----------- Reverse DLL -----------
+node* reversedll(node* head){
+if(head== NULL || head->next==NULL){
+    return head;
+}
+node* prev=NULL;
+node* curr=head;
+while(curr !=NULL){
+    prev=curr->back;
+    curr->next=prev;
+    prev=curr->back;
+    }
+    return prev->back;
+}
+   node*  insertb4KthEl(node* head,int k, int val){
+    if(k==1){
+        return insertb4Head(head,val);
+    }
+    node* temp=head;
+    int cnt=0;
+    while(temp !=NULL){
+        cnt++;
+        if(cnt==k) break;
+        temp=temp->next;
+    }
+    node* prev=temp->back;
+    node* newnode=new node(val,temp,prev);
+    prev->next=newnode;
+    temp->back=newnode;
+    return head;
+   }
+
+   void inserb4node(node* tempnd,int val){
+    node* prev=tempnd->back;
+    node* newnode=new node(val,tempnd,prev);
+    prev->next=newnode;
+    tempnd->back=newnode;
+
+   }
+
 
 int main(){
     vector<int>arr={1,3,5,7};
@@ -116,7 +201,17 @@ int main(){
 
   //  head= deleteTail(head);
   
-    head=removeKthElment(head,4);
+  // head=removeKthElment(head,4);
+   // deletenode(head);
+
+   // ------------ insertion ---------------
+
+  // head=insertb4Head(head,10);
+ 
+  //head=insertb4tail(head,12);
+  // head=insertb4KthEl(head,2,14);
+ // inserb4node(head->next,0);
+ head= reversedll(head);
     print(head);
     return 0;
 }
